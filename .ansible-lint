@@ -1,0 +1,11 @@
+---
+exclude_paths:
+  - .cache/
+  - .git/
+  - .github/
+  - molecule/
+  - molecule_bak/
+
+skip_list:
+  - '701'  # meta/main.yml should contain relevant info'
+
