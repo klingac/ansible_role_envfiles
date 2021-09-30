@@ -1,6 +1,8 @@
 ---
 ignore: |
   molecule*
+  .travis.yml
+  .github*
 
 # Based on ansible-lint config
 extends: default
