@@ -1,10 +1,30 @@
 ---
-# This is an example playbook to execute Ansible tests.
-
 - name: Verify
   hosts: all
   gather_facts: false
+  vars:
+    expected_content: |+
+      # Ansible managed
+      KEY1="s_val-1"
+      KEY2="2"
+      KEY3="val3"
+
   tasks:
-  - name: Example assertion
-    assert:
-      that: true
+    - name: get content of created files
+      slurp:
+        src: "{{ item }}"
+      register: slurp_output
+      loop:
+        - /etc/envfile1
+        - /etc/envfile2
+        - /etc/envfile3
+        - /etc/envfile4
+        - /etc/envfile5
+
+    - name: Check content of files
+      vars:
+        created_content: "{{ item.content| b64decode }}"
+      assert:
+        that: created_content == expected_content
+        fail_msg: "Error in expected content of  {{ item.source }}"
+      loop: "{{ slurp_output.results }}"

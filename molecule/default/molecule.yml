@@ -13,13 +13,17 @@ platforms:
     pre_build_image: true
 provisioner:
   name: ansible
+  config_options:
+    defaults:
+      ansible_managed: Ansible managed
   playbooks:
     converge: ../resources/playbooks/${MOLECULE_PLAYBOOK:-converge.yml}
+    #test: ../resources/playbooks/${MOLECULE_PLAYBOOK:-test.yml}
+    verify: ../resources/playbooks/verify.yml
 lint: |
   set -e
   yamllint .
   ansible-lint
 verifier:
   name: ansible
-  directory: ../resources/playbooks/
 
