@@ -1,7 +1,63 @@
 ---
 - name: Converge
   hosts: all
+  vars:
+    env_vars:
+      key1: s_val-1
+      key2: 2
+      key3: val3
   tasks:
     - name: "Include ansible_role_envfiles"
       include_role:
         name: "ansible_role_envfiles"
+      vars:
+        envfiles_list:
+          - name: "env file with name"
+            owner: root
+            group: root
+            mode: 0644
+            path: /etc/envfile1
+            config: "{{ env_vars }}"
+            has_secrets: false
+          - owner: root  # "env file without name"
+            group: root
+            mode: 0644
+            path: /etc/envfile2
+            config: "{{ env_vars }}"
+            has_secrets: false
+          - name: "env file with usage of defaults"
+            owner: root
+            group: root
+            mode: 0644
+            path: /etc/envfile3
+            config: "{{ env_vars }}"
+            has_secrets: false
+          - name: "env file with secrets (use no_log)"
+            owner: root
+            group: root
+            mode: 0644
+            path: /etc/envfile4
+            config: "{{ env_vars }}"
+            has_secrets: true
+
+- name: Test2
+  hosts: all
+  vars:
+    env_vars:
+      key1: s_val-1
+      key2: 2
+      key3: val3
+  tasks:
+    - name: "Include ansible_role_envfiles"
+      include_role:
+        name: "ansible_role_envfiles"
+      vars:
+        envfiles_list:
+          - name: "env file without path"
+            path: /etc/envfile5
+            config: "{{ env_vars }}"
+            has_secrets: false
+          - name: "env file without path"
+            config: "{{ env_vars }}"
+            has_secrets: false
+
