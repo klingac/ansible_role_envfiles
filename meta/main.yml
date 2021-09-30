@@ -1,3 +1,4 @@
+---
 galaxy_info:
   author: Martin Kruták <devklingac@gmail.com>
   description: DevOps
@@ -6,23 +7,23 @@ galaxy_info:
 
   issue_tracker_url: https://github.com/klingac/ansible_role_envfiles/issues
 
-  license: license (GPL-2.0-or-later, MIT, etc)
+  license: GPL-2.0
 
   min_ansible_version: 4.6.0
 
   platforms:
-  - name: Fedora
-    versions:
-    - all
-    - 25
-  - name: CentOS
-    versions:
-    - all
-    - 7
-    - 8
+    - name: Fedora
+      versions:
+        - all
+        - 25
+    - name: CentOS
+      versions:
+        - all
+        - 7
+        - 8
 
   galaxy_tags:
-    - env_file
+    - envfile
     - environment
 
 dependencies: []
