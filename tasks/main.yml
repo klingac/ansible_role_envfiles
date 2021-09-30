@@ -1,1 +1,10 @@
 ---
+- name: Create .env files
+  template:
+    dest: "{{ envfile_path }}"
+    src: "{{ envfile_template_src }}"
+    owner: "{{ envfile_owner }}"
+    group: "{{ envfile_group }}"
+    mode: "{{ envfile_mode }}"
+    # validate:
+

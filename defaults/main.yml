@@ -1,1 +1,7 @@
 ---
+envfile_path: /etc/environment
+envfile_template_src: env.j2
+envfile_owner: root
+envfile_group: root
+envfile_mode: 600
+
