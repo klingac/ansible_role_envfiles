@@ -1,10 +1,18 @@
 ---
+- name: Print list of ENV files
+  debug:
+    var: envfiles_list
+
 - name: Create .env files
   template:
-    dest: "{{ envfile_path }}"
-    src: "{{ envfile_template_src }}"
-    owner: "{{ envfile_owner }}"
-    group: "{{ envfile_group }}"
-    mode: "{{ envfile_mode }}"
-    # validate:
+    dest: "{{ e_file.path | default(envfile_path_default) }}"
+    src: "{{ e_file.template_src | default(envfile_template_src_default) }}"
+    owner: "{{ e_file.owner | default(envfile_owner_default) }}"
+    group: "{{ e_file.group | default(envfile_group_default) }}"
+    mode: "{{ e_file.mode | default(envfile_mode_default) }}"
+    # validate:  # @TODO
+  no_log: "{{ e_file.has_secrets | default(envfile_has_secrets_default) }}"
+  loop: "{{ envfiles_list }}"
+  loop_control:
+    loop_var: e_file
 

@@ -1,7 +1,11 @@
 ---
-envfile_path: /etc/environment
-envfile_template_src: env.j2
-envfile_owner: root
-envfile_group: root
-envfile_mode: 600
+envfile_path_default: /etc/environment
+envfile_template_src_default: env.j2
+envfile_owner_default: root
+envfile_group_default: root
+envfile_mode_default: 600
+envfile_has_secrets_default: false
+envfile_config_default: {}
 
+envfiles_list:
+  - "{{ _envfile_default }}"

@@ -1,1 +1,10 @@
 ---
+_envfile_default:
+  path: "{{ envfile_path_default }}"
+  template_src: "{{ envfile_template_src_default }}"
+  owner: "{{ envfile_owner_default }}"
+  group: "{{ envfile_group_default }}"
+  mode: "{{ envfile_mode_default }}"
+  has_secrets: "{{ envfile_has_secrets_default }}"
+  config: "{{ envfile_config_default }}"
+
