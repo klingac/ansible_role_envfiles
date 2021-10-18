@@ -5,9 +5,12 @@
   vars:
     expected_content: |+
       # Ansible managed
-      KEY1="s_val-1"
-      KEY2="2"
-      KEY3="val3"
+      KEY1=s_val-1
+      KEY2=2
+      KEY3=val3
+      KEY4='val 4'
+      KEY5='val 5
+      '
 
   tasks:
     - name: get content of created files

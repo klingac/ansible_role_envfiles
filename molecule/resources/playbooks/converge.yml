@@ -6,6 +6,10 @@
       key1: s_val-1
       key2: 2
       key3: val3
+      key4: 'val 4'
+      key5: >
+        val
+        5
   tasks:
     - name: "Include ansible_role_envfiles"
       include_role:
@@ -47,6 +51,10 @@
       key1: s_val-1
       key2: 2
       key3: val3
+      key4: 'val 4'
+      key5: >
+        val
+        5
   tasks:
     - name: "Include ansible_role_envfiles"
       include_role:
