@@ -54,8 +54,6 @@ jobs:
             playbook: converge.yml
           - distro: ubuntu2404
             playbook: converge.yml
-          - distro: debian11
-            playbook: converge.yml
           - distro: debian12
             playbook: converge.yml
           - distro: debian13
