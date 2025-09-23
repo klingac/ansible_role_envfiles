@@ -14,10 +14,14 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     steps:
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Start Docker
+        uses: docker-practice/actions-setup-docker@master
+
       - name: Check out the codebase.
         uses: actions/checkout@v2
-        #with:
-        #  path: 'klingac.envfiles'
 
       - name: Set up Python 3.
         uses: actions/setup-python@v2
@@ -60,8 +64,6 @@ jobs:
     steps:
       - name: Check out the codebase.
         uses: actions/checkout@v2
-        #with:
-        #  path: 'klingac.envfiles'
 
       - name: Set up Python 3.
         uses: actions/setup-python@v2
