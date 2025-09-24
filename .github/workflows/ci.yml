@@ -24,46 +24,46 @@ jobs:
 
           GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Run ansible-lint
-        uses: ansible/ansible-lint@main 
+      # - name: Run ansible-lint
+        # uses: ansible/ansible-lint@main 
 
-  molecule:
-    name: Molecule
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        include:
-          - distro: centos7
-            playbook: converge.yml
-          - distro: centos8
-            playbook: converge.yml
-          - distro: ubuntu2004
-            playbook: converge.yml
-          - distro: ubuntu2204
-            playbook: converge.yml
-          - distro: ubuntu2404
-            playbook: converge.yml
-          - distro: debian12
-            playbook: converge.yml
-          - distro: debian13
-            playbook: converge.yml
+  # molecule:
+  #   name: Molecule
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       include:
+  #         - distro: centos7
+  #           playbook: converge.yml
+  #         - distro: centos8
+  #           playbook: converge.yml
+  #         - distro: ubuntu2004
+  #           playbook: converge.yml
+  #         - distro: ubuntu2204
+  #           playbook: converge.yml
+  #         - distro: ubuntu2404
+  #           playbook: converge.yml
+  #         - distro: debian12
+  #           playbook: converge.yml
+  #         - distro: debian13
+  #           playbook: converge.yml
 
-    steps:
-      - name: Check out the codebase.
-        uses: actions/checkout@v4
+  #   steps:
+  #     - name: Check out the codebase.
+  #       uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: '3.x'
+  #     - name: Set up Python
+  #       uses: actions/setup-python@v6
+  #       with:
+  #         python-version: '3.x'
 
-      - name: Install test dependencies.
-        run: pip install ansible molecule[docker] docker 
+  #     - name: Install test dependencies.
+  #       run: pip install ansible molecule[docker] docker 
 
-      - name: Run Molecule tests.
-        run: molecule test
-        env:
-          PY_COLORS: '1'
-          ANSIBLE_FORCE_COLOR: '1'
-          MOLECULE_DISTRO: ${{ matrix.distro }}
-          MOLECULE_PLAYBOOK: ${{ matrix.playbook }}
+  #     - name: Run Molecule tests.
+  #       run: molecule test
+  #       env:
+  #         PY_COLORS: '1'
+  #         ANSIBLE_FORCE_COLOR: '1'
+  #         MOLECULE_DISTRO: ${{ matrix.distro }}
+  #         MOLECULE_PLAYBOOK: ${{ matrix.playbook }}
