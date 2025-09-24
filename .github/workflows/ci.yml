@@ -24,8 +24,8 @@ jobs:
 
           GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # - name: Run ansible-lint
-        # uses: ansible/ansible-lint@main 
+      - name: Run ansible-lint
+        uses: ansible/ansible-lint@main 
 
   # molecule:
   #   name: Molecule
