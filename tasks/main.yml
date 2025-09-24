@@ -1,10 +1,10 @@
 ---
 - name: Print list of ENV files
-  debug:
+  ansible.builtin.debug:
     var: envfiles_list
 
 - name: Create .env files
-  template:
+  ansible.builtin.template:
     dest: "{{ e_file.path | default(envfile_path_default) }}"
     src: "{{ e_file.template_src | default(envfile_template_src_default) }}"
     owner: "{{ e_file.owner | default(envfile_owner_default) }}"
