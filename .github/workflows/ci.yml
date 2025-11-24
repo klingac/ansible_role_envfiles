@@ -11,28 +11,22 @@ name: CI
 jobs:
 
   lint:
-    name: Lint
+    name: Lint 
     runs-on: ubuntu-latest
     steps:
-      - name: Check out the codebase.
-        uses: actions/checkout@v2
-        #with:
-        #  path: 'klingac.envfiles'
+      - uses: actions/checkout@v4
 
-      - name: Set up Python 3.
-        uses: actions/setup-python@v2
+      - name: Yamllint
+        uses: karancode/yamllint-github-action@master
         with:
-          python-version: '3.x'
+          yamllint_comment: true
+        env:
 
-      - name: Install test dependencies.
-        run: |
-          pip install yamllint
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Lint code.
-        run: |
-          yamllint .
-          ansible-lint
+      - name: Run ansible-lint
+        uses: ansible/ansible-lint@main 
+          
 
   molecule:
     name: Molecule
@@ -40,36 +34,26 @@ jobs:
     strategy:
       matrix:
         include:
-          - distro: centos8
+          - distro: rockylinux9
             playbook: converge.yml
-          - distro: centos7
+          - distro: ubuntu2204
             playbook: converge.yml
-          - distro: ubuntu2004
+          - distro: ubuntu2404
             playbook: converge.yml
-          - distro: ubuntu1804
-            playbook: converge.yml
-          - distro: debian11
-            playbook: converge.yml
-          - distro: debian10
-            playbook: converge.yml
-          - distro: debian9
-            playbook: converge.yml
-          - distro: centos7
+          - distro: debian12
             playbook: converge.yml
 
     steps:
       - name: Check out the codebase.
-        uses: actions/checkout@v2
-        #with:
-        #  path: 'klingac.envfiles'
+        uses: actions/checkout@v4
 
-      - name: Set up Python 3.
-        uses: actions/setup-python@v2
+      - name: Set up Python
+        uses: actions/setup-python@v6
         with:
           python-version: '3.x'
 
       - name: Install test dependencies.
-        run: pip install ansible molecule[docker] docker ansible-lint
+        run: pip install ansible molecule-plugins[docker] docker 
 
       - name: Run Molecule tests.
         run: molecule test

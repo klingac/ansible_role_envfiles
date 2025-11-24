@@ -5,7 +5,7 @@ driver:
   name: docker
 platforms:
   - name: instance
-    image: "geerlingguy/docker-${MOLECULE_DISTRO:-centos7}-ansible:latest"
+    image: "geerlingguy/docker-${MOLECULE_DISTRO:-ubuntu2404}-ansible:latest"
     #command: ${MOLECULE_DOCKER_COMMAND:-""}
     #volumes:
     #  - /sys/fs/cgroup:/sys/fs/cgroup:ro
@@ -15,7 +15,10 @@ provisioner:
   name: ansible
   config_options:
     defaults:
-      ansible_managed: Ansible managed
+      # ansible_managed: Ansible managed
+      # ansible_python_interpreter: /usr/bin/python3
+      # interpreter_python: /usr/bin/python3
+      roles_path: "${MOLECULE_PROJECT_DIRECTORY}/.."
   playbooks:
     converge: ../resources/playbooks/${MOLECULE_PLAYBOOK:-converge.yml}
     #test: ../resources/playbooks/${MOLECULE_PLAYBOOK:-test.yml}
