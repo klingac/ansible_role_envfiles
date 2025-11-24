@@ -15,7 +15,7 @@ provisioner:
   name: ansible
   config_options:
     defaults:
-      ansible_managed: Ansible managed
+      roles_path: "${MOLECULE_PROJECT_DIRECTORY}/.."
   playbooks:
     converge: ../resources/playbooks/${MOLECULE_PLAYBOOK:-converge.yml}
     #test: ../resources/playbooks/test.yml
