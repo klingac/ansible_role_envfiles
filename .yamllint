@@ -3,6 +3,7 @@ ignore: |
   molecule*
   .travis.yml
   .github*
+  .venv
 
 # Based on ansible-lint config
 extends: default
